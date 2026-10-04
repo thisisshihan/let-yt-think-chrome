@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "Let YT think Chrome",
+  "version": "0.1.2",
+  "description": "Makes YouTube see Firefox as Google Chrome by spoofing the User-Agent, Client Hints and related browser properties.",
+  "homepage_url": "https://github.com/thisisshihan/let-yt-think-chrome",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "let-yt-think-chrome@thisisshihan.github.io",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.youtube.com/*",
+    "*://*.youtube-nocookie.com/*",
+    "*://*.googlevideo.com/*"
+  ],
+  "background": {
+    "scripts": ["config.js", "background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.youtube-nocookie.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": ["config.js", "content.js"]
+    }
+  ]
+}
